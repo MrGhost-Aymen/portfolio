@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aymen Ouamou | GenomeSec Research Shell</title>
+    
+    <meta name="description" content="Aymen Ouamou - PhD Researcher in Computational Genomics & Security Specialist. Specialized in Plants Genomics and Secure Bio-Pipelines.">
+    <meta name="author" content="Aymen Ouamou">
+    <meta name="theme-color" content="#020c1b">
+
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="terminal-wrapper">
+        <div id="command-bar"></div>
+
+        <div id="terminal-container">
+            
+            <div id="system-status">
+                <span class="status-item">NODE: <span class="green">GENOMESEC_PRIMARY</span></span>
+                <span class="status-item">PROCESS: <span id="process-name" class="green">READY</span></span>
+                <span class="status-item">SEQUENCING: <span id="progress-bar" class="green">[░░░░░░░░░░] 0%</span></span>
+            </div>
+
+            <div id="terminal">
+                <div id="output">
+                    <div class="help-message">
+                        &gt; Initializing secure research environment...<br>
+                        &gt; Connection established to node: aymen@xbio<br>
+                        &gt; Type 'help' to begin research database query.<br><br>
+                    </div>
+                </div>
+
+                <div class="input-line">
+                    <span class="prompt">Shell@aymen:~$</span>
+                    <div class="autocomplete-container">
+                        <span id="inputMirror"></span>
+                        <input type="text" id="commandInput" autofocus autocomplete="off" spellcheck="false">
+                        <span id="autocompleteHint"></span>
+                    </div>
+                </div>
+            </div> </div> </div> <script src="script.js"></script>
+
+</body>
+</html>
