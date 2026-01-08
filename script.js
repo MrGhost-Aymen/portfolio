@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cv: () => {
             const link = document.createElement('a');
-            link.href = 'Aymen.pdf'; 
+            link.href = '/Aymen.pdf'; 
             link.download = 'Aymen.pdf';
             link.click();
             return "Accessing encrypted storage... Fetching CV_Aymen.pdf... Download started.";
