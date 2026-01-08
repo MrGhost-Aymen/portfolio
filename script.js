@@ -1,6 +1,6 @@
 /* ===============================
    GenomeSec Research Shell v1.0
-   Author: Aymen Ouamou
+   Author: Aymen trso
 ================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -21,19 +21,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const commands = {
 
         help: `
-<span class="category-header">-- Available Commands --</span><br>
-<b>whoami</b>        → researcher profile<br>
-<b>publications</b>  → publications & datasets<br>
-<b>research</b>      → research focus & directions<br>
-<b>projects</b>      → software & computational tools<br>
-<b>pipeline</b>      → organellar genome workflow<br>
-<b>tools</b>         → bioinformatics & security stack<br>
-<b>disclosures</b>   → responsible security disclosures<br>
-<b>cv</b>            → download curriculum vitae<br>
-<b>contact</b>       → professional contact<br>
-<b>clear / cls</b>   → clear terminal<br>
-<b>logout / exit</b> → terminate session<br><br>
-<span style="opacity:0.7">Aliases:</span> gh (github), ln (linkedin), fetch (neofetch), resume (cv)
+        <span class="category-header">-- Available Commands --</span><br>
+        <b>whoami</b>        → researcher profile<br>
+        <b>publications</b>  → publications & datasets<br>
+        <b>research</b>      → research focus & directions<br>
+        <b>projects</b>      → software & computational tools<br>
+        <b>pipeline</b>      → organellar genome workflow<br>
+        <b>tools</b>         → bioinformatics & security stack<br>
+        <b>disclosures</b>   → responsible security disclosures<br>
+        <b>cv</b>            → download curriculum vitae<br>
+        <b>contact</b>       → professional contact<br>
+        <b>clear / cls</b>   → clear terminal<br>
+        <b>logout / exit</b> → terminate session<br><br>
+        <span style="opacity:0.7">Aliases:</span> gh → github, ln → linkedin, fetch → neofetch, resume → cv
         `,
 
         neofetch: () => {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         whoami: `
-<b>Aymen Ouamou</b><br>
+<b>Aymen trso</b><br>
 Doctoral researcher in computational genomics, specializing in chloroplast and mitochondrial genome analysis, comparative genomics, RNA editing, and security-aware bioinformatics pipelines.
         `,
 
@@ -293,6 +293,7 @@ RE-AUTHENTICATE
     function createCommandBar() {
         const bar = document.getElementById("command-bar");
         const buttons = [
+            ["Help", "help"],
             ["Whoami", "whoami"],
             ["Publications", "publications"],
             ["Research", "research"],
