@@ -1,3 +1,8 @@
+/* ===============================
+   GenomeSec Research Shell v1.0
+   Author: Aymen Ouamou
+================================ */
+
 document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById("commandInput");
     const output = document.getElementById("output");
@@ -9,85 +14,134 @@ document.addEventListener("DOMContentLoaded", function () {
     let commandHistory = [];
     let historyIndex = -1;
 
-    // --- Commands Object (Help Removed, Neofetch Updated) ---
+    const SESSION_CPU = 72;
+    const SESSION_RAM = 41;
+    const SHELL_VERSION = "GenomeSec v1.0.0";
+
     const commands = {
+
+        help: `
+<span class="category-header">-- Available Commands --</span><br>
+<b>whoami</b>        → researcher profile<br>
+<b>publications</b>  → publications & datasets<br>
+<b>research</b>      → research focus & directions<br>
+<b>projects</b>      → software & computational tools<br>
+<b>pipeline</b>      → organellar genome workflow<br>
+<b>tools</b>         → bioinformatics & security stack<br>
+<b>disclosures</b>   → responsible security disclosures<br>
+<b>cv</b>            → download curriculum vitae<br>
+<b>contact</b>       → professional contact<br>
+<b>clear / cls</b>   → clear terminal<br>
+<b>logout / exit</b> → terminate session<br><br>
+<span style="opacity:0.7">Aliases:</span> gh (github), ln (linkedin), fetch (neofetch), resume (cv)
+        `,
+
         neofetch: () => {
             const t = new Date().toLocaleString();
-            return `<pre class="fetch-output">
-      <span class="research-accent">.</span>          
-     <span class="research-accent">/ \\</span>         <span class="research-accent">GenomeSec Research Shell</span>
-    <span class="research-accent">| <span class="white">S</span> |</span>        ────────────────────────────────
-   <span class="research-accent">/ <span class="white">DNA</span> \\</span>       <span class="white">User</span>        : <span class="research-accent">Aymen Ouamou</span>
-  <span class="research-accent">|  <span class="white">| |</span>  |</span>      <span class="white">Affiliation</span> : PhD Researcher
-   <span class="research-accent">\\ <span class="white">V V</span> /</span>       <span class="white">Email</span>       : <span class="white">Ouamoa@gmail.com</span>
-    <span class="research-accent">| <span class="white">_</span> |</span>        <span class="white">Focus</span>       : Plants Genomics
-     <span class="research-accent">\\ /</span>         <span class="white">Session</span>     : ${t}
-      <span class="research-accent">'</span>          ────────────────────────────────
-      
-      <span class="accent-blue">Active Modules:</span> whoami, research, projects, pipeline, 
-      cv, contact, github, linkedin, clear, logout.
-</pre>`;
+            const dnaSeq = Array.from({ length: 24 }, () => "ATGC"[Math.floor(Math.random() * 4)]).join("");
+            const cpuLoad = SESSION_CPU;
+            const ramLoad = SESSION_RAM;
+
+            return `
+<span class="research-accent">┌──────────────── SYSTEM OVERVIEW ────────────────┐</span>
+<span class="research-accent">│</span> <span class="white">USER:</span> mrghost-aymen.github.io                 <span class="research-accent">│</span>
+<span class="research-accent">│</span> <span class="white">TASK:</span> organellar_genome_assembly              <span class="research-accent">│</span>
+<span class="research-accent">├──────────────── LIVE DATA STREAM ───────────────┤</span>
+<span class="research-accent">│</span> <span class="white">SEQ:</span> <span class="green">${dnaSeq}</span>   <span class="research-accent">│</span>
+<span class="research-accent">│</span> <span class="white">CPU:</span> [${"█".repeat(cpuLoad / 10)}${"░".repeat(10 - cpuLoad / 10)}] ${cpuLoad}%                     <span class="research-accent">│</span>
+<span class="research-accent">│</span> <span class="white">RAM:</span> [${"█".repeat(ramLoad / 10)}${"░".repeat(10 - ramLoad / 10)}] ${ramLoad}%                     <span class="research-accent">│</span>
+<span class="research-accent">├──────────────── RESEARCH NODE ──────────────────┤</span>
+<span class="research-accent">│</span> <span class="white">DATASETS:</span> 1 plastomes | 1 mitogenomes        <span class="research-accent">│</span>
+<span class="research-accent">│</span> <span class="white">ACCESS:</span> NCBI GenBank                         <span class="research-accent">│</span>
+<span class="research-accent">│</span> <span class="white">STATUS:</span> <span class="green">OPERATIONAL</span>                     <span class="research-accent">│</span>
+<span class="research-accent">├──────────────── SHELL INFO ─────────────────────┤</span>
+<span class="research-accent">│</span> <span class="white">SHELL:</span> ${SHELL_VERSION}                    <span class="research-accent">│</span>
+<span class="research-accent">└─────────────────────────────────────────────────┘</span>
+<span class="white">SESSION:</span> ${t}<br><br>
+<span class="accent-blue">Active Modules:</span> whoami, publications, research, projects, pipeline, tools, disclosures, cv, contact, github, linkedin, clear, logout.
+            `;
         },
 
-        whoami: `<b>Aymen Ouamou</b><br>Doctoral researcher specializing in computational genomics with a focus on chloroplast and mitochondrial genome analysis, evolutionary inference, and security assessment of scientific data pipelines.`,
+        whoami: `
+<b>Aymen Ouamou</b><br>
+Doctoral researcher in computational genomics, specializing in chloroplast and mitochondrial genome analysis, comparative genomics, RNA editing, and security-aware bioinformatics pipelines.
+        `,
+
+        publications: `
+<span class="category-header">-- Publications & Datasets --</span><br>
+
+<b>[01] Artemisia ifranensis plastome and mitogenome</b><br>
+Type: Organellar genome resources<br>
+Status: Published<br>
+Repository: NCBI GenBank<br>
+Scope: Assembly, annotation, comparative analysis<br><br>
+
+<b>[02] RNA editing patterns in Asteraceae organelles</b><br>
+Type: Comparative genomics study<br>
+Status: Manuscript in preparation<br>
+Focus: C-to-U editing, codon impact, evolutionary implications
+        `,
 
         research: `
-        <span class="category-header">-- Published Research & Data --</span><br>
-        <b>[01] Artemisia ifranensis Organellar Genomes</b><br>
-        Status: Published (NCBI/GenBank)<br>
-        DOI: <a href="https://doi.org/10.XXXX/example1" target="_blank" class="green">10.XXXX/example1</a><br>
-        <br>
-        <b>[02] Comparative Analysis of RNA Editing in Asteraceae</b><br>
-        Status: In Preparation / Manuscript<br>
-        DOI: <span style="opacity:0.5">PENDING_ASSIGNMENT</span><br>`,
+<span class="category-header">-- Research Focus --</span><br>
+• Chloroplast and mitochondrial genome evolution in angiosperms<br>
+• RNA editing mechanisms and functional consequences<br>
+• Comparative genomics<br>
+• Ka/Ks–based selection analysis of organellar genes<br>
+        `,
 
         projects: `
-        <span class="category-header">-- Computational & Sec Projects --</span><br>
-        <b>[P-01] Auto-Annotate Pro</b><br>
-        Python-based wrapper for chloroplast genome annotation curation.<br>
-        Source: <a href="https://github.com/MrGhost-Aymen" target="_blank" class="green">GitHub Repo</a><br>
-        <br>
-        <b>[P-02] Bio-Sec Pipeline Auditor</b><br>
-        Tool for scanning bioinformatics workflows for common vulnerabilities.<br>
-        Source: <a href="https://github.com/MrGhost-Aymen" target="_blank" class="green">GitHub Repo</a><br>`,
+<span class="category-header">-- Software & Computational Projects --</span><br>
+<b>[P-01] Auto-Annotate Pro</b><br>
+Python-based wrapper for organellar genome annotation and curation.<br>
+Source: <a href="https://github.com/MrGhost-Aymen" target="_blank" class="green">GitHub</a><br><br>
+
+<b>[P-02] Bio-Sec Pipeline Auditor</b><br>
+Security analysis tool for bioinformatics workflows.<br>
+Source: <a href="https://github.com/MrGhost-Aymen" target="_blank" class="green">GitHub</a>
+        `,
 
         pipeline: `
-        <span class="research-accent">Restricted Workflow: Organellar Genome Pipeline</span><br>
-        <div class="pipeline-flow">
-        SRA retrieval → FastQC → Trimming<br>
-        → Host and contaminant filtering<br>
-        → Genome assembly<br>
-        → BUSCO validation<br>
-        → Functional annotation and curation
-        </div>`,
+<span class="research-accent">Restricted Workflow: Organellar Genome Pipeline</span><br>
+<div class="pipeline-flow">
+SRA retrieval → FastQC → Trimming → Host/contaminant filtering<br>
+→ Genome assembly → BUSCO validation → Auto Annotation & curation → SNPs indentification across the closes species 
+</div>
+        `,
+
+        tools: `
+<b>Bioinformatics:</b> Galaxy, GeSeq, BUSCO, IRscope, TBtools ...<br>
+<b>Security:</b> Burp Suite Pro, Nmap, Nuclei, Metasploit ...
+        `,
+
+        disclosures: `
+<b>Responsible Security Disclosures</b><br>
+• Meta (Facebook): Stored XSS<br>
+• Government infrastructure:  Blind SQL injection
+        `,
 
         contact: `
-        <span class="category-header">-- Secure Communication --</span><br>
-        <b>Primary Email:</b> <a href="mailto:ouamoa@gmail.com" class="green">ouamoa@gmail.com</a><br>
-        <b>Availability:</b> Open for PhD collaborations & Security consulting.`,
-
-        pentest: `<b>Penetration Testing Experience</b><br>• Web application security testing<br>• Infrastructure and API assessment<br>• Secure deployment review for data-driven systems`,
-
-        disclosures: `<b>Responsible Security Disclosures</b><br>• <b>Meta (Facebook):</b> Privilege escalation<br>• <b>Microsoft:</b> Intune and Exchange Admin vulnerabilities<br>• <b>Gov:</b> Stored XSS in government infrastructure`,
-
-        tools: `<b>Bioinformatics:</b> Galaxy, GeSeq, BUSCO, IRscope, TBtools<br><b>Security:</b> Burp Suite, Nmap, Nuclei, Metasploit, Sliver C2`,
+<span class="category-header">-- Professional Contact --</span><br>
+<b>Email:</b> <a href="mailto:ouamoa@gmail.com" class="green">ouamoa@gmail.com</a><br>
+<b>Availability:</b> Open to PhD positions and research collaborations
+        `,
 
         github: () => {
             window.open("https://github.com/MrGhost-Aymen", "_blank");
-            return "Establishing secure link to GitHub: @MrGhost-Aymen...";
+            return "Establishing secure link to GitHub...";
         },
 
         linkedin: () => {
             window.open("https://www.linkedin.com/in/aymen-o-shell/", "_blank");
-            return "Syncing professional network with LinkedIn...";
+            return "Syncing professional network...";
         },
 
         cv: () => {
-            const link = document.createElement('a');
-            link.href = './Aymen.pdf'; 
-            link.download = 'Aymen.pdf';
+            const link = document.createElement("a");
+            link.href = "./Aymen.pdf";
+            link.download = "Aymen.pdf";
             link.click();
-            return "Accessing encrypted storage... Download of Aymen.pdf started.";
+            return "Accessing encrypted storage... CV download initiated.";
         },
 
         clear: () => {
@@ -100,37 +154,54 @@ document.addEventListener("DOMContentLoaded", function () {
             wrapper.style.transition = "all 2s ease";
             wrapper.style.filter = "blur(15px) brightness(0)";
             wrapper.style.transform = "scale(0.9)";
-            
+
             setTimeout(() => {
                 document.body.innerHTML = `
-                    <div style="color: #00ff99; font-family: 'Fira Code', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center;">
-                        <p style="font-size: 1.5rem;">[ SESSION TERMINATED ]</p>
-                        <button onclick="location.reload()" style="margin-top: 25px; background: transparent; border: 1px solid #00ff99; color: #00ff99; padding: 10px 20px; cursor: pointer;">RE-AUTHENTICATE</button>
-                    </div>`;
+<div style="color:#00ff99;font-family:'Fira Code',monospace;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;">
+<p style="font-size:1.5rem;">[ SESSION TERMINATED ]</p>
+<button onclick="location.reload()" style="margin-top:25px;background:transparent;border:1px solid #00ff99;color:#00ff99;padding:10px 20px;cursor:pointer;">
+RE-AUTHENTICATE
+</button>
+</div>`;
             }, 2000);
+
             return "De-authenticating session...";
         }
     };
 
-    const aliases = { gh: "github", ln: "linkedin", cls: "clear", fetch: "neofetch", exit: "logout", resume: "cv" };
+    const aliases = {
+        gh: "github",
+        ln: "linkedin",
+        cls: "clear",
+        fetch: "neofetch",
+        exit: "logout",
+        resume: "cv",
+        papers: "publications",
+        pub: "publications"
+    };
+
     const commandList = Object.keys(commands).concat(Object.keys(aliases));
 
     function typewriter(element, text, speed = 2) {
         let i = 0;
         input.disabled = true;
+
         function type() {
             if (i < text.length) {
-                if (text.charAt(i) === "<") {
+                if (text[i] === "<") {
                     let tag = "";
-                    while (text.charAt(i) !== ">" && i < text.length) { tag += text.charAt(i); i++; }
-                    tag += ">"; element.innerHTML += tag; i++;
-                } else { element.innerHTML += text.charAt(i); i++; }
+                    while (text[i] !== ">" && i < text.length) tag += text[i++];
+                    tag += ">";
+                    element.innerHTML += tag;
+                    i++;
+                } else {
+                    element.innerHTML += text[i++];
+                }
                 terminal.scrollTop = terminal.scrollHeight;
                 setTimeout(type, speed);
             } else {
                 input.disabled = false;
                 input.focus();
-                terminal.scrollTop = terminal.scrollHeight;
             }
         }
         type();
@@ -139,91 +210,117 @@ document.addEventListener("DOMContentLoaded", function () {
     async function processCommand(cmd) {
         cmd = cmd.toLowerCase().trim();
         if (!cmd) return;
+
         commandHistory.push(cmd);
         historyIndex = commandHistory.length;
+
         const actualCmd = aliases[cmd] || cmd;
-        if (actualCmd === "clear") { commands.clear(); return; }
+
+        if (actualCmd === "clear") {
+            commands.clear();
+            return;
+        }
+
         const commandLine = document.createElement("div");
-        commandLine.classList.add("command-line");
-        commandLine.innerHTML = `<span class="prompt">researcher@aymen:~$</span> ${cmd}`;
+        commandLine.className = "command-line";
+        commandLine.innerHTML = `<span class="prompt">Mrghost-aymen.github.io:~$</span> ${cmd}`;
         output.appendChild(commandLine);
-        terminal.scrollTop = terminal.scrollHeight;
-        await new Promise(r => setTimeout(r, 300));
-        const response = typeof commands[actualCmd] === "function" ? commands[actualCmd]() : commands[actualCmd] || `Command not found: ${cmd}.`;
+
+        await new Promise(r => setTimeout(r, 200));
+
         const resultLine = document.createElement("div");
-        resultLine.classList.add("command-result");
+        resultLine.className = "command-result";
         output.appendChild(resultLine);
+
+        const response = typeof commands[actualCmd] === "function"
+            ? commands[actualCmd]()
+            : commands[actualCmd] || `Command not found: ${cmd}. Type 'help'.`;
+
         if (response) typewriter(resultLine, response);
-        else { input.disabled = false; input.focus(); terminal.scrollTop = terminal.scrollHeight; }
+        else input.disabled = false;
     }
 
-    function createCommandBar() {
-        const bar = document.getElementById("command-bar");
-        const buttonConfig = [
-            { label: "Whoami", cmd: "whoami" },
-            { label: "Research", cmd: "research" },
-            { label: "Projects", cmd: "projects" },
-            { label: "Pipeline", cmd: "pipeline" },
-            { label: "CV", cmd: "cv" },
-            { label: "Contact", cmd: "contact" },
-            { label: "Neofetch", cmd: "neofetch" },
-            { label: "Github", cmd: "github" },
-            { label: "Linkedin", cmd: "linkedin" },
-            { label: "Logout", cmd: "logout" }
-        ];
-        bar.innerHTML = "";
-        buttonConfig.forEach(item => {
-            const btn = document.createElement("button");
-            btn.textContent = item.label;
-            if (item.cmd === "cv" || item.cmd === "contact") btn.style.borderColor = "#00d9ff";
-            if (item.cmd === "logout") btn.style.borderColor = "#ff5555";
-            btn.onclick = () => { if (!input.disabled) processCommand(item.cmd); };
-            bar.appendChild(btn);
-        });
+    function updateAutocompleteHint() {
+        const val = input.value;
+        if (!val) {
+            hint.textContent = "";
+            return;
+        }
+        const match = commandList.find(c => c.startsWith(val));
+        if (match) {
+            hint.textContent = match.slice(val.length);
+            mirror.textContent = val;
+            hint.style.left = mirror.offsetWidth + 5 + "px";
+        } else {
+            hint.textContent = "";
+        }
     }
 
-    // --- AUTO-BOOT LOGIC ---
-    async function bootSequence() {
-        createCommandBar();
-        updateSystemStatus();
-        // Wait for the initial HTML "Initializing..." text to settle
-        await new Promise(r => setTimeout(r, 1000));
-        processCommand("neofetch");
-    }
+    input.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+            processCommand(input.value);
+            input.value = "";
+            hint.textContent = "";
+        } else if (e.key === "Tab") {
+            e.preventDefault();
+            const match = commandList.find(c => c.startsWith(input.value));
+            if (match) input.value = match;
+        }
+    });
 
-    // Existing helper functions (autocomplete, system status, etc.)
+    input.addEventListener("input", updateAutocompleteHint);
+    terminalContainer.addEventListener("click", () => input.focus());
+
     function updateSystemStatus() {
         const bar = document.getElementById("progress-bar");
         const processName = document.getElementById("process-name");
         const processes = ["SEQ_ALIGN", "MITO_SEARCH", "DOI_INDEXING", "PHYLO_GEN"];
         let percent = 0;
+
         processName.textContent = processes[Math.floor(Math.random() * processes.length)];
+
         const interval = setInterval(() => {
             percent += 2;
-            if (percent >= 100) { clearInterval(interval); setTimeout(updateSystemStatus, 3000); }
+            if (percent >= 100) {
+                clearInterval(interval);
+                setTimeout(updateSystemStatus, 3000);
+            }
             const filled = Math.floor(percent / 10);
-            bar.textContent = `[${"■".repeat(filled)}${"░".repeat(10-filled)}] ${percent}%`;
+            bar.textContent = `[${"■".repeat(filled)}${"░".repeat(10 - filled)}] ${percent}%`;
         }, 150);
     }
 
-    function updateAutocompleteHint() {
-        const val = input.value;
-        if (!val) { hint.textContent = ""; return; }
-        const match = commandList.find(c => c.startsWith(val));
-        if (match) {
-            hint.textContent = match.slice(val.length);
-            mirror.textContent = val;
-            hint.style.left = (mirror.offsetWidth + 5) + "px";
-        } else { hint.textContent = ""; }
+    function createCommandBar() {
+        const bar = document.getElementById("command-bar");
+        const buttons = [
+            ["Whoami", "whoami"],
+            ["Publications", "publications"],
+            ["Research", "research"],
+            ["Projects", "projects"],
+            ["Pipeline", "pipeline"],
+            ["CV", "cv"],
+            ["Contact", "contact"],
+            ["Neofetch", "neofetch"],
+            ["GitHub", "github"],
+            ["LinkedIn", "linkedin"],
+            ["Logout", "logout"]
+        ];
+
+        bar.innerHTML = "";
+        buttons.forEach(([label, cmd]) => {
+            const btn = document.createElement("button");
+            btn.textContent = label;
+            btn.onclick = () => !input.disabled && processCommand(cmd);
+            bar.appendChild(btn);
+        });
     }
 
-    input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") { processCommand(input.value); input.value = ""; hint.textContent = ""; }
-        else if (e.key === "Tab") { e.preventDefault(); const match = commandList.find(c => c.startsWith(input.value)); if (match) input.value = match; }
-    });
+    async function bootSequence() {
+        createCommandBar();
+        updateSystemStatus();
+        await new Promise(r => setTimeout(r, 800));
+        processCommand("neofetch");
+    }
 
-    input.addEventListener("input", updateAutocompleteHint);
-    terminalContainer.addEventListener("click", () => input.focus());
-    
-    bootSequence(); // Start the auto-boot
+    bootSequence();
 });
