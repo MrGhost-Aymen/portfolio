@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span class="research-accent">│</span> <span class="white">SHELL:</span> ${SHELL_VERSION}                    <span class="research-accent">│</span>
 <span class="research-accent">└─────────────────────────────────────────────────┘</span>
 <span class="white">SESSION:</span> ${t}<br><br>
-<span class="accent-blue">Active Modules:</span> whoami, publications, research, projects, pipeline, tools, disclosures, cv, contact, github, linkedin, clear, logout.
+<span class="accent-blue">Active Modules:</span> whoami, publications, research, projects, pipeline, tools, disclosures, cv, contact, github, linkedin, logout.
             `;
         },
 
@@ -72,7 +72,7 @@ Doctoral researcher in computational genomics, specializing in Plants genome ana
 
 <b>[01] Artemisia ifranensis plastome and mitogenome</b><br>
 Type: Organellar genome resources<br>
-Status: Published<br>
+Status: Unpublished yet<br>
 Repository: NCBI GenBank<br>
 Scope: Assembly, annotation, comparative analysis<br><br>
 
@@ -95,10 +95,6 @@ Focus: C-to-U editing, codon impact, evolutionary implications
 <b>[P-01] Auto-Annotate Pro</b><br>
 Python-based wrapper for organellar genome annotation and curation.<br>
 Source: <a href="https://github.com/MrGhost-Aymen" target="_blank" class="green">GitHub</a><br><br>
-
-<b>[P-02] Bio-Sec Pipeline Auditor</b><br>
-Security analysis tool for bioinformatics workflows.<br>
-Source: <a href="https://github.com/MrGhost-Aymen" target="_blank" class="green">GitHub</a>
         `,
 
         pipeline: `
