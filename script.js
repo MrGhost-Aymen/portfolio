@@ -1,6 +1,6 @@
 /* ===============================
    GenomeSec Research Shell v1.0
-   Author: Aymen trso
+   Author: Aymen Ouamou
 ================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const SESSION_CPU = 72;
     const SESSION_RAM = 41;
-    const SHELL_VERSION = "GenomeSec v1.0.0";
+    const SHELL_VERSION = "GenomeSec v1.1.0";
 
     const commands = {
 
@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         whoami: `
-<b>Aymen trso</b><br>
-Doctoral researcher in computational genomics, specializing in chloroplast and mitochondrial genome analysis, comparative genomics, RNA editing, and security-aware bioinformatics pipelines.
+<b>Aymen Ouamou</b><br>
+Doctoral researcher in computational genomics, specializing in Plants genome analysis, comparative genomics, RNA editing, and Dev bioinformatics pipelines.
         `,
 
         publications: `
@@ -116,7 +116,7 @@ SRA retrieval → FastQC → Trimming → Host/contaminant filtering<br>
 
         disclosures: `
 <b>Responsible Security Disclosures</b><br>
-• Meta (Facebook): Stored XSS<br>
+• Meta: Stored XSS<br>
 • Government infrastructure:  Blind SQL injection
         `,
 
