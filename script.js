@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span class="research-accent">│</span> <span class="white">CPU:</span> [${"█".repeat(cpuLoad / 10)}${"░".repeat(10 - cpuLoad / 10)}] ${cpuLoad}%                     <span class="research-accent">│</span>
 <span class="research-accent">│</span> <span class="white">RAM:</span> [${"█".repeat(ramLoad / 10)}${"░".repeat(10 - ramLoad / 10)}] ${ramLoad}%                     <span class="research-accent">│</span>
 <span class="research-accent">├──────────────── RESEARCH NODE ──────────────────┤</span>
-<span class="research-accent">│</span> <span class="white">DATASETS:</span> 1 plastomes | 1 mitogenomes        <span class="research-accent">│</span>
+<span class="research-accent">│</span> <span class="white">DATASETS:</span> 6 plastomes | 6 mitogenomes | 1 Nuclear  <span class="research-accent">│</span>
 <span class="research-accent">│</span> <span class="white">ACCESS:</span> NCBI GenBank                         <span class="research-accent">│</span>
 <span class="research-accent">│</span> <span class="white">STATUS:</span> <span class="green">OPERATIONAL</span>                     <span class="research-accent">│</span>
 <span class="research-accent">├──────────────── SHELL INFO ─────────────────────┤</span>
